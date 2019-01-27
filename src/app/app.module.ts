@@ -12,6 +12,7 @@ import { RegistrationFormComponent } from './user/registration-form/registration
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import * as firebase from 'firebase';
+import {environment} from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,6 @@ import * as firebase from 'firebase';
 })
 export class AppModule {
   constructor () {
-    firebase.initializeApp()
+    firebase.initializeApp(environment.firebase);
   }
 }
