@@ -11,6 +11,7 @@ import { RegistrationComponent } from './user/registration/registration.componen
 import { RegistrationFormComponent } from './user/registration-form/registration-form.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import * as firebase from 'firebase';
 
 @NgModule({
   declarations: [
@@ -34,4 +35,7 @@ import {HttpClientModule} from '@angular/common/http';
   bootstrap: [AppComponent]
 })
 export class AppModule {
+  constructor () {
+    firebase.initializeApp()
+  }
 }
