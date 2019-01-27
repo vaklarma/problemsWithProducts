@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {UserService} from '../../shared/user.service';
 
 @Component({
   selector: 'app-login-form',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginFormComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _userService: UserService) {
+  }
 
   ngOnInit() {
   }
 
+  onSubmit() {
+    console.log('login button');
+    this._userService.login('default3@valami.hu', 'gabiildi');
+  }
 }

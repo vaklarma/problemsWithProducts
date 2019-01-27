@@ -8,13 +8,17 @@ import {UserService} from '../../shared/user.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  loggedInUser: UserModel;
+  loggedInUser: UserModel | any;
 
   constructor(public userService: UserService) {
   }
 
   ngOnInit() {
-    this.loggedInUser = this.userService.getAllUser();
+    this.loggedInUser = this.userService.currentUser;
+    console.log('Belépve a firebase db ből nézve: ', this.userService.currentUser);
   }
 
+  logout() {
+    this.userService.logout();
+  }
 }

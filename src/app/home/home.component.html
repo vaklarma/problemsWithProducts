@@ -1,4 +1,8 @@
-<app-jumbotron [loginForm]="isLoggedIn"></app-jumbotron>
+<app-jumbotron [loginForm]="true"></app-jumbotron>
+<div>
+ Belépve: {{userServise.isLoggedIn$ | async}}
+
+</div>
 
 <section class="features-icons bg-light text-center">
   <div class="container">

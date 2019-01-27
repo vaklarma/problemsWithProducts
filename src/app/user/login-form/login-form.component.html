@@ -18,7 +18,11 @@
       <input type="password" class="form-control form-control-lg" placeholder="Enter your password...">
     </div>
     <div class="col-6 mb-2 mx-auto">
-      <button type="submit" class="btn btn-block btn-lg btn-primary">Bejelentkezés</button>
+      <button
+        (click)="onSubmit()"
+        type="submit"
+        class="btn btn-block btn-lg btn-primary"
+      >Bejelentkezés</button>
     </div>
 
   </div>

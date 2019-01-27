@@ -6,37 +6,43 @@ import {environment} from '../../environments/environment';
 import {FirebaseRegistrationModel} from './firebase-registration-model';
 
 import {map, switchMap, tap} from 'rxjs/operators';
-import {ReplaySubject} from 'rxjs';
+import {from, Observable, ReplaySubject} from 'rxjs';
 import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  isLoggedIn = new ReplaySubject(1);
-  private _user: UserModel;
-  private _fbAuthData: FirebaseRegistrationModel;
+  isLoggedIn$ = new ReplaySubject<boolean>(1);
+  public currentUser = new ReplaySubject<string>(1);;
+  private _user = new ReplaySubject<UserModel>(1);
+  private _fbAuthData: any;
 
   constructor(private _http: HttpClient) {
     firebase.auth().onAuthStateChanged(
       user => {
         console.log('Be van lépve', user);
-        if (!user == null) {
-          this.isLoggedIn.next(true);
+        if (user != null) {
+          this._fbAuthData = user;
+          this.getUserById(user.uid).subscribe(
+            (remoteUser) => {
+              this._user.next(remoteUser);
+              this.currentUser.next(remoteUser.name);
+            }
+          );
+          this.isLoggedIn$.next(true);
         } else {
-          this.isLoggedIn.next(false);
+          this.isLoggedIn$.next(false);
+          this.currentUser.next(null);
+          this._user.next(null);
           console.log('Nincs belépve', user);
         }
       }
     );
-    this._user = {
-      id: '01user',
-      email: 'acsdcsdc@asasxa.hu',
-      password: 'pppppppp',
-      profilePictureUrl: 'pic',
-      permission: 'worker',
-      name: 'makmarci'
-    };
+  }
+
+  login(email: string, password: string): Observable<any> {
+    return from(firebase.auth().signInWithEmailAndPassword(email, password));
   }
 
   register(newUser: UserModel) {
@@ -63,20 +69,26 @@ export class UserService {
       .pipe(switchMap(user => this.saveNewUserToFbDatabase(user)));
   }
 
+  getUserById(fbid: string) {
+    return this._http.get<UserModel>(`${environment.firebase.baseUrl}/users/${fbid}.json`);
+  }
+
   getfbAuthResponse(): FirebaseRegistrationModel {
     console.log('UserServicegetfbauthdata', this._fbAuthData);
     return this._fbAuthData;
   }
 
-  getAllUser() {
+  getLoggedInUser() {
     return this._user;
   }
 
-  setNewUser(newUser: UserModel) {
-    this._user = newUser;
-  }
 
   saveNewUserToFbDatabase(newUser: UserModel) {
     return this._http.put(`${environment.firebase.baseUrl}/users/${newUser.id}.json`, newUser);
+  }
+
+  logout() {
+    firebase.auth().signOut();
+    console.log('exit');
   }
 }

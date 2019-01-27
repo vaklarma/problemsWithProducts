@@ -7,11 +7,11 @@ import {UserService} from '../shared/user.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-isLoggedIn: boolean;
-  constructor(private _userServise: UserService) { }
+
+  constructor(public userServise: UserService) { }
 
   ngOnInit() {
-    this.isLoggedIn = false;
+
   }
 
 }

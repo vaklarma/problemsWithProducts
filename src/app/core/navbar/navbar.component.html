@@ -46,6 +46,10 @@
 
     <a class="btn btn-primary form-inline my-2 my-lg-0"
     routerLink="/user/registration">Regisztráció</a>
-<div>{{loggedInUser.name}}</div>
+    <button
+      (click)="logout()"
+      class="btn btn-primary form-inline my-2 my-lg-0"
+       >Kilépés</button>
+<div>{{userService.currentUser | async}}</div>
   </div>
 </nav>
