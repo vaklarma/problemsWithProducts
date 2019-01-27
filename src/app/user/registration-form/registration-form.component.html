@@ -1,0 +1,82 @@
+<div class="row">
+  <div class="container col-6 my-5">
+    <div class="card ">
+      <div class="card-header text-center">
+        <h2>Regisztráció</h2>
+      </div>
+      <div class="card-body">
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Email cím</label>
+            <input
+              formControlName="email"
+              type="email"
+              class="form-control"
+              id="exampleFormControlInput1"
+              placeholder="name@example.com">
+            {{form.get('email').value}}
+          </div>
+
+
+          <div class="form-group">
+            <label for="exampleFormControlInput2">Jelszó</label>
+            <input
+              formControlName="password"
+              type="password"
+              class="form-control"
+              id="exampleFormControlInput2"
+              placeholder="Password">
+            {{form.get('password').value}}
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput3">Jelszó ismét</label>
+            <input
+              formControlName="repeatPassword"
+              type="password"
+              class="form-control"
+              id="exampleFormControlInput3"
+              placeholder="Repeat password">
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput6">Becenév</label>
+            <input
+              formControlName="name"
+              type="text"
+              class="form-control"
+              id="exampleFormControlInput6"
+              placeholder="Becenév">
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput4">Profilkép url</label>
+            <input
+              formControlName="profilePicUrl"
+              type="text"
+              class="form-control"
+              id="exampleFormControlInput4"
+              placeholder="Picture url">
+          </div>
+
+
+          <div class="form-group mx-auto text-center">
+
+            <button type="submit" class="btn btn-primary">Regisztráció</button>
+            <div>
+              <h4>Form infok</h4>
+              Valid: {{form.valid}}
+              <br>
+              New user:
+              <pre>
+                {{newUser | json}}
+              </pre>
+
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

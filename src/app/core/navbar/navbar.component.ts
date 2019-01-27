@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {UserModel} from '../../shared/user-model';
+import {UserService} from '../../shared/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -6,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  loggedInUser: UserModel;
 
-  constructor() { }
+  constructor(public userService: UserService) {
+  }
 
   ngOnInit() {
+    this.loggedInUser = this.userService.getAllUser();
   }
 
 }

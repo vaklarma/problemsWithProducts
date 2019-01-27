@@ -7,6 +7,9 @@ import {LoginFormComponent} from './user/login-form/login-form.component';
 import {NavbarComponent} from './core/navbar/navbar.component';
 import {JumbotronComponent} from './core/jumbotron/jumbotron.component';
 import {AppRoutingModule} from './app-routing.module';
+import { RegistrationComponent } from './user/registration/registration.component';
+import { RegistrationFormComponent } from './user/registration-form/registration-form.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,10 +18,14 @@ import {AppRoutingModule} from './app-routing.module';
     LoginFormComponent,
     NavbarComponent,
     JumbotronComponent,
-    ...AppRoutingModule.routableComponents
+    ...AppRoutingModule.routableComponents,
+    RegistrationComponent,
+    RegistrationFormComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
   providers: [],

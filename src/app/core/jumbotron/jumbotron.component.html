@@ -1,23 +1,27 @@
 <div class="jumbotron jumbotron-fluid text-white text-center landing">
-  <div class="container m-3">
-
-    <div class="row">
-      <div class="col-5 mx-auto">
-        <h1 class=" ">Bejelentkezés</h1>
-        <p class="lead ">
-          Bejelentkezés után a menüben elérhetővé válnak számodra a jogosultságodnak megfelelő menüpontok.
-        </p>
-        <hr class="my-4 border">
-
-
+  <ng-container *ngIf="loginForm; else withOutLoginForm">
+    <div class="container m-3">
+      <div class="row">
+        <div class="col-5 mx-auto">
+          <h1 class=" ">Bejelentkezés</h1>
+          <p class="lead ">
+            Bejelentkezés után a menüben elérhetővé válnak számodra a jogosultságodnak megfelelő menüpontok.
+          </p>
+          <hr class="my-4 border">
+        </div>
       </div>
-    </div>
 
-    <div class="row">
-      <div class="col-5 mx-auto">
-        <app-login></app-login>
+      <div class="row">
+        <div class="col-5 mx-auto">
+
+          <app-login></app-login>
+        </div>
       </div>
-    </div>
 
-  </div>
+    </div>
+  </ng-container>
+  <ng-template #withOutLoginForm>
+    <ng-content select="h1"></ng-content>
+    <ng-content select="p.lead"></ng-content>
+  </ng-template>
 </div>
