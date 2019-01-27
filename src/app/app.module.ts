@@ -10,6 +10,7 @@ import {AppRoutingModule} from './app-routing.module';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { RegistrationFormComponent } from './user/registration-form/registration-form.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [],

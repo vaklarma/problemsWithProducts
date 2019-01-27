@@ -11,7 +11,7 @@ isLoggedIn: boolean;
   constructor(private _userServise: UserService) { }
 
   ngOnInit() {
-    this.isLoggedIn = this._userServise.isLoggedIn;
+    this.isLoggedIn = false;
   }
 
 }

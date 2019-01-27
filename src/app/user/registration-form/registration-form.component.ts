@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserModel} from '../../shared/user-model';
 import {UserService} from '../../shared/user.service';
 
+
 @Component({
   selector: 'app-registration-form',
   templateUrl: './registration-form.component.html',
@@ -11,7 +12,8 @@ import {UserService} from '../../shared/user.service';
 export class RegistrationFormComponent implements OnInit {
   profilePictureUrl = 'src/assets/img/profil.png';
   form: FormGroup;
-  newUser : UserModel;
+  newUser: UserModel;
+  authResponse: any;
 
   constructor(private fb: FormBuilder,
               private _userService: UserService) {
@@ -20,20 +22,25 @@ export class RegistrationFormComponent implements OnInit {
   ngOnInit() {
     this.form = this.fb.group(
       {
-        email: [null, Validators.required],
-        password: [null, Validators.required],
-        name: [null, Validators.required],
-        repeatPassword: [null, Validators.required],
+        //id: ['1234', Validators.required],
+        email: ['default3@valami.hu', Validators.required],
+        password: ['gabiildi', Validators.required],
+        name: ['gabiildi', Validators.required],
+        repeatPassword: ['gabiildi', Validators.required],
         profilePicUrl: ['default pic url', Validators.required],
 
       }
     );
   }
+
   onSubmit() {
     console.log('A regformból adat:', this.form.value);
     this.newUser = this.form.value;
-    this._userService.setNewUser(this.newUser);
-    console.log('Az új user neve', this._userService.getAllUser().name);
+    this._userService.register(this.newUser).subscribe(
+      (data) => this.authResponse = this._userService.getfbAuthResponse().localId,
+      (error) => console.log('valami hiba', error)
+    );
+
 
   }
 
