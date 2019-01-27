@@ -21,7 +21,8 @@ h6 {
   font-weight: 700;
 }
 .jumbotron {
-  background: url("assets/img/warehouse_01.jpg") no-repeat center center;
+  background: url("assets/img/warehouse_19.jpg") no-repeat center center;
+  background-size: cover;
   margin-bottom: 0px;
 }
 

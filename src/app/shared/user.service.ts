@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
 import {UserModel} from './user-model';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 
 import {FirebaseRegistrationModel} from './firebase-registration-model';
 
-import {catchError, map, switchMap, tap} from 'rxjs/operators';
-import {ReplaySubject, throwError} from 'rxjs';
+import {map, switchMap, tap} from 'rxjs/operators';
+import {ReplaySubject} from 'rxjs';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,17 @@ export class UserService {
   private _fbAuthData: FirebaseRegistrationModel;
 
   constructor(private _http: HttpClient) {
+    firebase.auth().onAuthStateChanged(
+      user => {
+        console.log('Be van lépve', user);
+        if (!user == null) {
+          this.isLoggedIn.next(true);
+        } else {
+          this.isLoggedIn.next(false);
+          console.log('Nincs belépve', user);
+        }
+      }
+    );
     this._user = {
       id: '01user',
       email: 'acsdcsdc@asasxa.hu',
