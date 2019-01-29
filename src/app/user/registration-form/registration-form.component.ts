@@ -10,8 +10,7 @@ import {UserService} from '../../shared/user.service';
   styleUrls: ['./registration-form.component.css']
 })
 export class RegistrationFormComponent implements OnInit {
-  profilePictureUrl = 'src/assets/img/profil.png';
-  form: FormGroup;
+  registrationForm: FormGroup;
   newUser: UserModel;
   authResponse: any;
 
@@ -20,12 +19,12 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.form = this.fb.group(
+    this.registrationForm = this.fb.group(
       {
         //id: ['1234', Validators.required],
-        email: ['default3@valami.hu', Validators.required],
+        email: ['default3@valami.hu', [Validators.required, Validators.email]],
         password: ['gabiildi', Validators.required],
-        name: ['gabiildi', Validators.required],
+        name: ['gabiildi', [Validators.required, Validators.minLength(15), Validators.pattern('[a-zA-Z ]*')]],
         repeatPassword: ['gabiildi', Validators.required],
         profilePicUrl: ['default pic url', Validators.required],
 
@@ -34,8 +33,8 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('A regformból adat:', this.form.value);
-    this.newUser = this.form.value;
+    console.log('A regformból adat:', this.registrationForm.value);
+    this.newUser = this.registrationForm.value;
     this._userService.register(this.newUser).subscribe(
       (data) => this.authResponse = this._userService.getfbAuthResponse().localId,
       (error) => console.log('valami hiba', error)

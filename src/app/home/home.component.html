@@ -1,8 +1,10 @@
-<app-jumbotron [loginForm]="true"></app-jumbotron>
-<div>
- Belépve: {{userServise.isLoggedIn$ | async}}
+<app-jumbotron [loginFormIsNeeded]="!(userServise.isLoggedIn$ | async)">
+  <h1 class=" mb-4">Használd</h1>
+  <p class="lead">
+    Használd az alkalmazást és tudni fogsz mindent mindenről :)
+  </p>
+</app-jumbotron>
 
-</div>
 
 <section class="features-icons bg-light text-center">
   <div class="container">

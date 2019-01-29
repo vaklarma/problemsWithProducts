@@ -20,10 +20,15 @@ h6 {
   font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 700;
 }
-.jumbotron {
-  background: url("assets/img/warehouse_19.jpg") no-repeat center center;
+
+.jumbotron{
+
+
+  background: url("assets/img/jumbotron_backgound_08.jpg") no-repeat center center;
   background-size: cover;
   margin-bottom: 0px;
+
+
 }
 
 @media (min-width: 768px) {

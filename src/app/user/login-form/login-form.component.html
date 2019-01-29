@@ -1,28 +1,40 @@
-<form>
-  <p>
-    Ha nincs még felhasználóneved, kérlek regisztráld magad !
-  </p>
-  <p>
-    Ha esetleg elfelejtetted a jelszavad,
-    <a href="#">csinálj újat</a>
-    !
-  </p>
-  <div class="alert alert-danger" role="alert">
-    A simple danger alert—check it out!
+<p>
+  Ha nincs még felhasználóneved, kérlek regisztráld magad !
+</p>
+<p>
+  Ha esetleg elfelejtetted a jelszavad,
+  <a href="#">csinálj újat</a>
+  !
+</p>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div *ngIf="loginError" class="alert alert-danger" role="alert">
+    <p>Hibás felhasználónév vagy jelszó</p>
   </div>
+
   <div class="row">
     <div class="col-12 mb-2">
-      <input type="email" class="form-control form-control-lg" placeholder="Enter your email...">
+      <input
+        formControlName="email"
+        type="email"
+        class="form-control form-control-lg"
+        placeholder="Enter your email..."
+      >
+      {{loginForm.valid}}
     </div>
     <div class="col-12 mb-4 ">
-      <input type="password" class="form-control form-control-lg" placeholder="Enter your password...">
+      <input
+        formControlName="password"
+        type="password"
+        class="form-control form-control-lg"
+        placeholder="Enter your password..."
+      >
     </div>
     <div class="col-6 mb-2 mx-auto">
       <button
-        (click)="onSubmit()"
         type="submit"
         class="btn btn-block btn-lg btn-primary"
-      >Bejelentkezés</button>
+      >Bejelentkezés
+      </button>
     </div>
 
   </div>

@@ -6,7 +6,7 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./jumbotron.component.css']
 })
 export class JumbotronComponent implements OnInit {
-  @Input() loginForm;
+  @Input() loginFormIsNeeded;
 
   constructor() {
   }

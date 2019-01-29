@@ -44,12 +44,14 @@
     </ul>
 
 
-    <a class="btn btn-primary form-inline my-2 my-lg-0"
-    routerLink="/user/registration">Regisztráció</a>
-    <button
+    <button *ngIf="!(userService.currentUser | async)" class="btn btn-primary form-inline my-2 my-lg-0"
+    routerLink="/user/registration">Regisztráció</button>
+
+    <button *ngIf="(userService.currentUser | async)"
       (click)="logout()"
       class="btn btn-primary form-inline my-2 my-lg-0"
-       >Kilépés</button>
-<div>{{userService.currentUser | async}}</div>
+       >Kilépés({{ userService.currentUser | async }})</button>
+
+
   </div>
 </nav>
