@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserModel} from '../../shared/user-model';
 import {UserService} from '../../shared/user.service';
+import {minimumPasswordLength} from './registration-form.validator';
 
 
 @Component({
@@ -23,7 +24,9 @@ export class RegistrationFormComponent implements OnInit {
       {
         //id: ['1234', Validators.required],
         email: ['default3@valami.hu', [Validators.required, Validators.email]],
-        password: ['gabiildi', Validators.required],
+        password: ['gabiildi', minimumPasswordLength(() => {
+          return this.newUser;
+        })],
         name: ['gabiildi', [Validators.required, Validators.minLength(15), Validators.pattern('[a-zA-Z ]*')]],
         repeatPassword: ['gabiildi', Validators.required],
         profilePicUrl: ['default pic url', Validators.required],

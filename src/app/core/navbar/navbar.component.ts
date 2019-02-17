@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, DoCheck, OnInit} from '@angular/core';
 import {UserModel} from '../../shared/user-model';
 import {UserService} from '../../shared/user.service';
 
@@ -7,7 +7,7 @@ import {UserService} from '../../shared/user.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, DoCheck {
 
 
   constructor(public userService: UserService) {
@@ -18,5 +18,9 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.userService.logout();
+  }
+
+  ngDoCheck(): void {
+    console.log('Docheck');
   }
 }
